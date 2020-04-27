@@ -143,9 +143,12 @@ class App extends React.Component{
             <Fragment>
                 <div className="MyProfile" ></div>
                 <div className="fake-body" >
-                <div className="Container" >
-                        {person}
-                </div>
+                    <div className="Container" >
+                            {person}
+                    </div>
+                    <div className="Details" >
+                            DOCTOR/PATIENT DETAILS
+                    </div>
                 </div>
             </Fragment>
         )
