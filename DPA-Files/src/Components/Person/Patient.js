@@ -1,16 +1,34 @@
 import React from 'react'
 
-const Patient = props => {
-    return (
-        <div className="Doctor Patient" >
+class Patient extends React.Component {
+    shouldComponentUpdate = (nextprops,nextstate) => {
+        console.log("PATIENT shouldcomponentupdate")
+        if(nextprops.withiddoctorInfo === this.props.withiddoctorInfo || 
+           nextprops.displaydoctor === this.props.displaydoctors ||
+           nextprops.withiddoctorInfo !== this.props.withiddoctorInfo || 
+           nextprops.displaydoctor !== this.props.displaydoctors){
+                return false
+            }
+        else{
+            return true
+        }
+    }
+    componentDidUpdate(){
+        console.log("PATIENT componentDidUpate")
+    }
+    render (){
+        console.log("patient rendering...")
+        return(
+        <div className="Doctor Patient" onClick={ () => this.props.Click(this.props.id) } >
             <div className="Profile" ></div>
             <div className="Content" >
-                Name:  {props.Doctor_name}<br/>
-                Place:  {props.Doctor_place}<br/>
-                Contact:  {props.Doctor_contact}<br/>
+                Name:  {this.props.Doctor_name}<br/>
+                Place:  {this.props.Doctor_place}<br/>
+                Contact:  {this.props.Doctor_contact}<br/>
             </div>
         </div>
-    )
+        )
+    }
 }
 
 export default Patient

@@ -2,8 +2,8 @@ import React from 'react'
 
 const Patientdetail = props => {
     return(
-        <div>
-
+        <div className="Details" >
+                PATIENT DETAILS
         </div>
     )
 }

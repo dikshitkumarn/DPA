@@ -3,10 +3,15 @@ import Doctor from '../Components/Person/Doctor'
 import Patient from '../Components/Person/Patient'
 import Login from '../Components/Login/Login'
 import './App.css'
+import Details from '../Components/Detail Page/Details'
 // import Doctorcontext from '../hoc/Context/Doctorcontext'
 // import Patientcontext from '../hoc/Context/Patientcontext'
 
+var newdoctorInfo
+var newpatientInfo
+
 class App extends React.Component{
+
     state={
         //Database
         isDoctor: false,
@@ -79,8 +84,56 @@ class App extends React.Component{
             }
         ],
         //original state
-        doctorClick: false,
-        patientClick: false
+        withiddoctorInfo:[],
+        withidpatientInfo:[],
+        displaydoctor:{},
+        displaypatient:{},
+        showdetails:false
+    }
+
+    static getDerivedStateFromProps = (props,State) => {
+        console.log("derivedstate")
+        return State
+    }
+
+    // shouldComponentUpdate(nextProps,nextState){
+    //     console.log("APP shouldcomponentupdate")
+    //     if(nextState.withiddoctorInfo !== this.state.withiddoctorInfo || 
+    //        nextState.withidpatientInfo !== this.state.withidpatientInfo
+    //        )
+    //         return false
+    //     else
+    //         return true
+    // }
+
+    componentDidUpdate(){
+        console.log("componentdidupdate")
+    }
+
+    UpdateState = (id) => {
+        var newState = {...this.state}
+        newState.showdetails=true
+        if(this.state.isPatient){
+            newState.withiddoctorInfo = newdoctorInfo
+            newState.withiddoctorInfo.map( info => {
+                if( info.id === id ){
+                    newState.displaydoctor = {...info}
+                }
+                return null
+            } )
+            this.setState({...newState})
+        }
+        else if(this.state.isDoctor){
+            newState.withidpatientInfo = newpatientInfo
+            newState.withidpatientInfo.map( info => {
+                if( info.id === id ){
+                    newState.displaypatient = {...info}
+                }
+                
+                return null
+            } )
+            this.setState({...newState} )
+        }
     }
 
     handleLogin = () => {
@@ -101,40 +154,65 @@ class App extends React.Component{
             PrevState => {return({checked2: !PrevState.checked2, checked1:false})}
         )
     }
-
-    render(){
+    close = () => {
+        this.setState({showdetails : false }) 
+        console.log(this.state.showdetails)
+    }
+    render = () => { 
         var person
+        var details = {}
         if(this.state.isLogin && this.state.isDoctor){
+            newpatientInfo = [...this.state.patientInfo]
             person=(
                 this.state.patientInfo.map(
-                    (patient,index) => //<Doctorcontext.Provider value={{patientClick: this.state.patientClick}} >
+                    (patient,index) => {//<Doctorcontext.Provider value={{patientClick: this.state.patientClick}} >
+                                            var patientInfo = this.state.patientInfo[index]
+                                            patientInfo = {id:index,...patientInfo}
+                                            newpatientInfo[index] = {...patientInfo}
+                                            // console.log(newpatientInfo)
+                                            return(
                                             <Doctor
                                                 key={index}
+                                                id={index}
+                                                withidpatientInfo={this.state.withidpatientInfo}
+                                                displaypatient={this.state.withidpatientInfo}
                                                 Patient_profile={patient.profile}
                                                 Patient_name={patient.name}
                                                 Patient_place={patient.place}
                                                 Patient_contact={patient.contact}
+                                                Click={this.UpdateState}
                                                 // patientClick= {this.state.patientClick}
-                                            />
+                                            />)}
                                        // </Doctorcontext.Provider> 
                 )
             )
+            details=this.state.displaypatient
         }
         else if(this.state.isLogin && this.state.isPatient){
+            newdoctorInfo = [...this.state.doctorInfo]
             person=(
                 this.state.doctorInfo.map(
-                    (doctor,index) => //<Patientcontext.Provider value={{doctorClick: this.state.doctorClick}} >
+                    (doctor,index) => {//<Patientcontext.Provider value={{doctorClick: this.state.doctorClick}} >
+                                        var doctorInfo = this.state.doctorInfo[index]
+                                        doctorInfo = {id:index,...doctorInfo}
+                                        newdoctorInfo[index] = {...doctorInfo}
+                                        // console.log(newdoctorInfo)
+                                        return(
                                         <Patient 
                                             key={index}
+                                            id={index}
+                                            withiddoctorInfo={this.state.withiddoctorInfo}
+                                            displaydoctor={this.state.withiddoctorInfo}
                                             Doctor_profile={doctor.profile}
                                             Doctor_name={doctor.name}
                                             Doctor_place={doctor.place}
-                                            Doctor_contact={doctor.contact} 
-                                            doctorClick= {this.state.doctorClick}     
-                                        />
+                                            Doctor_contact={doctor.contact}   
+                                            Click={this.UpdateState}
+                                        />)}
                                      // </Patientcontext.Provider>
                 )
             )
+            details=this.state.displaydoctor
         }
         else{
             person = (<Login Click={this.handleLogin} checked1={this.state.checked1} checked2={this.state.checked2} Change1={this.handleChange1} Change2={this.handleChange2} />)
@@ -146,9 +224,7 @@ class App extends React.Component{
                     <div className="Container" >
                             {person}
                     </div>
-                    <div className="Details" >
-                            DOCTOR/PATIENT DETAILS
-                    </div>
+                    <Details display={this.state.isLogin} Details={details} showdetails={this.state.showdetails} isLogin={this.state.isLogin} Click={this.close} />
                 </div>
             </Fragment>
         )
