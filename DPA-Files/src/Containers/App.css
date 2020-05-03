@@ -1,26 +1,31 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito:600,700&display=swap");
 .Doctor{
     display: flex;
-    position: relative;
-    z-index: 1;
     align-items: center;
     justify-content: center;
-    background-color: rgb(196, 196, 250);
-    border-radius: 5px;
-    width: 60%;
-    height: 10vh;
-    margin: 7px;
-    border: 1px solid #eee;
-    box-shadow: 0 2px 3px #ccc;
-    padding: 0.6rem;
-}
-.Doctor:active{
-    box-shadow: 0 0 5px #ccc;
-}
-.Doctor:hover{
-    background-color: rgb(133, 159, 214);
+    position: relative;
+    border: 0;
+    width: max-content;
+    padding: 5px;
     cursor: pointer;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+    font-family: Nunito, sans-serif;
+    background:#4D6FE5;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.13);
+    margin: 5px;
+    z-index: 1;
+    text-transform: capitalize;
+}
+/* .Doctor:active{
+    box-shadow: 0 0 5px #ccc;
     width: 77%;
+} */
+.Doctor:hover{
+    background-color: rgb(211, 47, 47);
+    cursor: pointer;
+    /* width: 77%; */
 }
 .Details-container{
     position: relative;
@@ -37,9 +42,9 @@
     height: 78%;
     max-height: 500px;
     z-index: 501;
-    border: 5px solid #ccc;
+    /* border: 5px solid #ccc; */
     border-radius: 5px;
-    background-color: rgb(245, 241, 245);
+    background-color: #4D6FE5;
     justify-content: center;
     align-items: center;
     /* font-family: Nunito, sans-serif; */
@@ -69,13 +74,23 @@
     }
     .Details{
         display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
         position: fixed;
         width: 90%;
         height: 75%;
         z-index: 600;
         top: 10%;
         opacity: 1;
-        background-color: honeydew;
+        background-color: #4D6FE5;
+        /* -webkit-transition: all 0.2s ease;
+        transition: all 0.2s ease; */
+        min-height: max-content;
+    }
+    .Profile2{
+        width: 70px;
+        height: 70px;
     }
 }
 @media(min-width: 601px){
@@ -99,6 +114,9 @@
     }
     .Details{
         display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
         position: fixed;
         right: 4px;
         top: 20%;
@@ -106,12 +124,15 @@
         height: 78%;
         max-height: 500px;
         z-index: 501;
+        background-color: #4D6FE5;
         box-shadow: 0 0 10px rgb(177, 176, 176);
+        /* -webkit-transition: all 0.2s ease;
+        transition: all 0.2s ease; */
+        min-height: max-content;
     }
-    .Doctor:active{
-        box-shadow: 0 0 5px #ccc;
-        width: 75%;
-        height: calc( 10vh - 10px );
+    .Profile2{
+        width: 150px;
+        height: 150px;
     }
 }
 .fake-body{
@@ -137,7 +158,6 @@
     border-radius: 50%;
     width: 5vh;
     height: 5vh;
-    background-color: black;
     z-index: 1;
     left: 3px;
     top: 3px;
@@ -173,21 +193,22 @@
     width: 90%;
     height: fit-content;
     min-height: 80%; 
-    z-index: 3;
+    z-index: 4;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    background-color:  rgb(245, 241, 245);
+    background-color:  rgb(216, 217, 218);
     padding: 3px;
     box-shadow: 0 0 5px #ccc;
 }
 .Details{
     /* display:block; */
     opacity: 1;
-    border: 5px solid #ccc;
+    /* border: 5px solid #ccc; */
     border-radius: 5px;
-    background-color: rgb(245, 241, 245);
+    background-color: #4D6FE5;
     justify-content: center;
     align-items: center;
+    min-height: max-content;
 }
 .MyProfile{
     display: flex;
@@ -196,9 +217,10 @@
     position: fixed;
     width: 100%;
     height: 25%;
-    background-color: rgb(24, 88, 207);
+    background-color: #4D6FE5;
     z-index: 2;
     top: 0;
+    cursor: pointer;
 }
 .body{
     display: flex;
@@ -211,7 +233,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgb(223, 220, 217);
+    background-color: #4D6FE5;
     z-index: -5;
     overflow-y: scroll;
     font-family: Nunito, Roboto, Arial, sans-serif;
@@ -231,4 +253,99 @@
     top: 0;
     left: 0;
     z-index: -3; 
+}
+.logo{
+    position: relative;
+    top: 5px;
+    width: max-content;
+    height: max-content;
+    cursor: pointer;
+    z-index: 900;
+}
+.profile{
+    width: 50px;
+    height: 50px;
+    /* width: fit-content;
+    height: fit-content; */
+}
+.profile-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: max-content;
+    height: max-content;
+    z-index: 2;
+    
+}
+.button{
+    border: 0;
+    text-transform: capitalize;
+  width: max-content;
+  padding: 5px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 1rem;
+  font-family: Nunito, sans-serif;
+  background: #6381e8;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.13);
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  margin: 5px;
+}
+.fake-profile{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    /* background-color: #4D6FE5; */
+    background-color: #4D6FE5;
+    color:white;
+}
+.Profile2{
+    position: relative;
+    border-radius: 50%;
+    /* top: 10%; */
+    left: auto;
+    /* left: 3px;
+    top: 3px; */
+}
+.detailed-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    width: max-content;
+    height: max-content;
+    position: relative;
+}
+.Details-inner{
+    position: relative;
+    border: 0;
+    width: max-content;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+    font-family: Nunito, sans-serif;
+    background:#4D6FE5;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.13);
+    margin: 5px;
+    z-index: 1;
+    text-transform: capitalize;
+}
+.link{
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
 }

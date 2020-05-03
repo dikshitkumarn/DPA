@@ -8,11 +8,27 @@ class Login extends React.Component {
 
     state={
         fromDB:{
-            doctorInfo:{},
-            patientInfo:{},
+            doctorInfo:[{
+                name:"mani",
+                age:"18",
+                location:"annanagar",
+                email:"mani@manipur.com",
+                contact:"9600714338",
+                latitude:"11.2189",
+                longitude:"78.1674"
+            }],
+            patientInfo:[{
+                name:"mani",
+                age:"18",
+                location:"annanagar",
+                email:"mani@manipur.com",
+                contact:"9600714338",
+                latitude:"11.2189",
+                longitude:"78.1674"
+            }],
             isdoctor:false,
             ispatient:true,
-            location:"",
+            // location:"",
             islogin:false
         },
         signin:{
@@ -27,7 +43,8 @@ class Login extends React.Component {
             location:"",
             email:"",
             password:"",
-            hospital:""
+            hospital:"",
+            contact:""
         },
         option:2,
         islogin:false
@@ -51,8 +68,10 @@ class Login extends React.Component {
     handleSubmit = event =>{
         // this.setState({ islogin:true })
         event.preventDefault()
+        if( (this.state.option===1) || (this.state.signup.isdoctor || this.state.signup.ispatient) ){
         this.setState({islogin:true})
         console.log("Submitted ")
+        }
         // var details
         // if(this.state.option === 2 ){
         // details = {...this.state.signup}

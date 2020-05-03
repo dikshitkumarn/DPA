@@ -2,12 +2,10 @@ import React from 'react'
 import MyProfile from '../Components/MyProfile/MyProfile'
 import Doctor from '../Components/Person/Doctor'
 import Patient from '../Components/Person/Patient'
-// import Login from '../Components/Login/Login'
 import './App.css'
 import Details from '../Components/Detail Page/Details'
-// import Doctorcontext from '../hoc/Context/Doctorcontext'
-// import Patientcontext from '../hoc/Context/Patientcontext'
-
+import doctorimage from '.././Components/Images/doctorpic.png'
+import patientimage from '.././Components/Images/patientpic.png'
 
 var newdoctorInfo
 var newpatientInfo
@@ -22,68 +20,10 @@ class App extends React.Component{
         // checked1: false,
         // checked2: false,
         doctorInfo: [
-            {
-                name: "doctor mani",
-                place: "doctor manipur",
-                profile: "doctor_mani.jpeg",
-                contact: 9600714338
-            },
-            {
-                name: "doctor mani2",
-                place: 'doctor Manipur2',
-                profile: "doctor_mani2.jpeg",
-                contact: 9994959031
-            },
-            {
-                name: "doctor mani",
-                place: "doctor manipur",
-                profile: "doctor_mani.jpeg",
-                contact: 9600714338
-            },
-            {
-                name: "doctor mani2",
-                place: 'doctor Manipur2',
-                profile: "doctor_mani2.jpeg",
-                contact: 9994959031
-            },
-            {
-                name: "doctor mani",
-                place: "doctor manipur",
-                profile: "doctor_mani.jpeg",
-                contact: 9600714338
-            },
-            {
-                name: "doctor mani2",
-                place: 'doctor Manipur2',
-                profile: "doctor_mani2.jpeg",
-                contact: 9994959031
-            },
-            {
-                name: "doctor mani",
-                place: "doctor manipur",
-                profile: "doctor_mani.jpeg",
-                contact: 9600714338
-            },
-            {
-                name: "doctor mani2",
-                place: 'doctor Manipur2',
-                profile: "doctor_mani2.jpeg",
-                contact: 9994959031
-            }
+            ...this.props.State.fromDB.doctorInfo
         ],
         patientInfo: [
-            {
-                name: "patient mani",
-                place: "patient manipur",
-                profile: "patient_mani.jpeg",
-                contact: 9600277564
-            },
-            {
-                name: "patient mani2",
-                place: "patient manipur2",
-                profile: "patient_mani2.jpeg",
-                contact: 9443340679
-            }
+            ...this.props.State.fromDB.patientInfo
         ],
         //original state
         withiddoctorInfo:[],
@@ -161,7 +101,7 @@ class App extends React.Component{
         this.setState({showdetails : false }) 
     }
     render = () => { 
-        console.log(this.state)
+        // console.log(this.state)
         var person
         var details = {}
         if(this.state.isLogin && this.state.isDoctor){
@@ -177,11 +117,11 @@ class App extends React.Component{
                                             <Doctor
                                                 key={index}
                                                 id={index}
-                                                withidpatientInfo={this.state.withidpatientInfo}
-                                                displaypatient={this.state.withidpatientInfo}
-                                                Patient_profile={patient.profile}
+                                                // withidpatientInfo={this.state.withidpatientInfo}
+                                                // displaypatient={this.state.withidpatientInfo}
+                                                // Patient_profile={patientimage}
                                                 Patient_name={patient.name}
-                                                Patient_place={patient.place}
+                                                Patient_place={patient.location}
                                                 Patient_contact={patient.contact}
                                                 Click={this.UpdateState}
                                                 // patientClick= {this.state.patientClick}
@@ -189,13 +129,13 @@ class App extends React.Component{
                                        // </Doctorcontext.Provider> 
                 )
             )
-            details=this.state.displaypatient
+            details={profilepic:patientimage,...this.state.displaypatient}
         }
         else if(this.state.isLogin && this.state.isPatient){
             newdoctorInfo = [...this.state.doctorInfo]
             person=(
                 this.state.doctorInfo.map(
-                    (doctor,index) => {//<Patientcontext.Provider value={{doctorClick: this.state.doctorClick}} >
+                    (doctor,index) => {
                                         var doctorInfo = this.state.doctorInfo[index]
                                         doctorInfo = {id:index,...doctorInfo}
                                         newdoctorInfo[index] = {...doctorInfo}
@@ -204,22 +144,25 @@ class App extends React.Component{
                                         <Patient 
                                             key={index}
                                             id={index}
-                                            withiddoctorInfo={this.state.withiddoctorInfo}
-                                            displaydoctor={this.state.withiddoctorInfo}
-                                            Doctor_profile={doctor.profile}
+                                            // withiddoctorInfo={this.state.withiddoctorInfo}
+                                            // displaydoctor={this.state.withiddoctorInfo}
                                             Doctor_name={doctor.name}
-                                            Doctor_place={doctor.place}
+                                            Doctor_place={doctor.location}
                                             Doctor_contact={doctor.contact}   
                                             Click={this.UpdateState}
                                         />)}
-                                     // </Patientcontext.Provider>
                 )
             )
-            details=this.state.displaydoctor
+            details={profilepic:doctorimage,...this.state.displaydoctor}
         }
+        console.log(details)
         return ( 
             <div className="body" >
-                <MyProfile />
+                {this.props.State.fromDB.isdoctor?
+                    <MyProfile name={this.props.State.fromDB.doctorInfo[0].name} age={this.props.State.fromDB.doctorInfo[0].age} location={this.props.State.fromDB.doctorInfo[0].location} isdoctor={this.props.State.fromDB.isdoctor} contact={this.props.State.fromDB.doctorInfo[0].contact} />
+                    :
+                    <MyProfile name={this.props.State.fromDB.patientInfo[0].name} age={this.props.State.fromDB.patientInfo[0].age} location={this.props.State.fromDB.patientInfo[0].location} isdoctor={this.props.State.fromDB.isdoctor} contact={this.props.State.fromDB.patientInfo[0].contact} />
+                }
                 <div className="fake-body" ></div>
                     <div className="Container" >
                             {person}

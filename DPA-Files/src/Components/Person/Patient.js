@@ -1,4 +1,7 @@
 import React from 'react'
+import doctor from '../Images/doctorpic.png'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPhone, faMapMarker } from '@fortawesome/free-solid-svg-icons'
 
 class Patient extends React.Component {
     // shouldComponentUpdate = (nextprops,nextstate) => {
@@ -17,16 +20,17 @@ class Patient extends React.Component {
     //     console.log("PATIENT componentDidUpate")
     // }
     render (){
+        var style={
+            color:"red"
+        }
         console.log("patient rendering...")
         return(
-        <div className="Doctor" onClick={ () => this.props.Click(this.props.id) } >
-            <div className="Profile" ></div>
-            {/* <div className="Content" > */}
-               <h4> Name:  {this.props.Doctor_name}<br/>
-                Place:  {this.props.Doctor_place}<br/>
-                Contact:  {this.props.Doctor_contact}<br/></h4>
-            {/* </div> */}
-        </div>
+        <button className="Doctor" onClick={ () => this.props.Click(this.props.id) } >
+            <div className="Profile" ><img src={doctor} style={{width:"100%",height:"100%"}} /></div>
+               <h4> Dr.{this.props.Doctor_name}<br/>
+               <FontAwesomeIcon style={style} icon={faMapMarker} aria-hidden="true" /> {this.props.Doctor_place}<br/>
+               <FontAwesomeIcon style={style} icon={faPhone} aria-hidden="true" />  {this.props.Doctor_contact}<br/></h4>
+        </button>
         )
     }
 }
