@@ -35,7 +35,7 @@ class Details extends React.Component {
                     <div className="Details-container" onClick={this.props.Click} ></div>
                         <div className="Details" >
                             <div className="Profile2" >
-                                <img src={this.props.Details.profilepic} style={{width:"100%",height:"100%"}} />
+                                <img src={this.props.Details.profilepic} style={{width:"100%",height:"100%"}} alt="profile" />
                             </div>
                             <div className="detailed-content" >
                                 <button className="Details-inner" >{this.props.Details.name}</button>

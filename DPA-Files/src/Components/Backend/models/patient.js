@@ -19,8 +19,13 @@ const PatientSchema= new mongoose.Schema({
         }
     },
 
+    location:{
+type:String
+    },
 
-    phone: {
+
+
+    contact: {
         type: Number,
        unique:true,
         validate(value) {
@@ -45,6 +50,18 @@ const PatientSchema= new mongoose.Schema({
         type: String,
         trim:true,
         minlength:6
+    },
+    isdoctor: {
+        type: String,
+        required: true
+    },
+
+    ispatient: {
+        type: String,
+        required: true
+    },
+    hospital:{
+        type:String
     }
 
 

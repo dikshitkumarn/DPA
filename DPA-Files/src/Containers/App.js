@@ -11,7 +11,6 @@ var newdoctorInfo
 var newpatientInfo
 
 class App extends React.Component{
-
     state={
         //Database
         isDoctor: this.props.State.fromDB.isdoctor,
@@ -56,7 +55,7 @@ class App extends React.Component{
         
         var newState = {...this.state}
         newState.showdetails=true
-        if(this.state.isPatient){
+        if(this.state.isPatient==="true"){
             newState.withiddoctorInfo = newdoctorInfo
             newState.withiddoctorInfo.map( info => {
                 if( info.id === id ){
@@ -66,7 +65,7 @@ class App extends React.Component{
             } )
             this.setState({...newState})
         }
-        else if(this.state.isDoctor){
+        else if(this.state.isDoctor==="true"){
             newState.withidpatientInfo = newpatientInfo
             newState.withidpatientInfo.map( info => {
                 if( info.id === id ){
@@ -104,7 +103,7 @@ class App extends React.Component{
         // console.log(this.state)
         var person
         var details = {}
-        if(this.state.isLogin && this.state.isDoctor){
+        if(this.state.isLogin && this.state.isDoctor==="true"){
             newpatientInfo = [...this.state.patientInfo]
             person=(
                 this.state.patientInfo.map(
@@ -131,7 +130,7 @@ class App extends React.Component{
             )
             details={profilepic:patientimage,...this.state.displaypatient}
         }
-        else if(this.state.isLogin && this.state.isPatient){
+        else if(this.state.isLogin && this.state.isPatient==="true"){
             newdoctorInfo = [...this.state.doctorInfo]
             person=(
                 this.state.doctorInfo.map(
@@ -155,10 +154,9 @@ class App extends React.Component{
             )
             details={profilepic:doctorimage,...this.state.displaydoctor}
         }
-        console.log(details)
         return ( 
             <div className="body" >
-                {this.props.State.fromDB.isdoctor?
+                {this.props.State.fromDB.isdoctor==="true"?
                     <MyProfile name={this.props.State.fromDB.doctorInfo[0].name} age={this.props.State.fromDB.doctorInfo[0].age} location={this.props.State.fromDB.doctorInfo[0].location} isdoctor={this.props.State.fromDB.isdoctor} contact={this.props.State.fromDB.doctorInfo[0].contact} />
                     :
                     <MyProfile name={this.props.State.fromDB.patientInfo[0].name} age={this.props.State.fromDB.patientInfo[0].age} location={this.props.State.fromDB.patientInfo[0].location} isdoctor={this.props.State.fromDB.isdoctor} contact={this.props.State.fromDB.patientInfo[0].contact} />

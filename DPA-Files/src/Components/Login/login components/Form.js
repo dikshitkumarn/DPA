@@ -17,6 +17,7 @@ class Form extends React.Component {
     //     }
     // }
     render(){
+        var wrong
         var docstyle={
             background: this.state.doccolor,
             color:"white",
@@ -27,14 +28,21 @@ class Form extends React.Component {
             color:"white",
             height:"fit-content"
         }
+        this.props.wrong?
+        wrong={
+            border:"2px solid red"
+        }:
+        wrong={
+            border:"none"
+        }
     return(
         // <div className="" >
         <form className='account-form form-container' onSubmit={ event => this.props.Submit(event)}>
             <div className={'account-form-fields ' + (this.props.option === 1 ? 'sign-in' : 'sign-up') }>
                 {this.props.option === 1 ?
                 <Fragment>
-                    <input value={this.props.signin.email} className="textbox" name='email' type='email' placeholder='E-mail' required={true} onChange={event => this.props.Change2(event)} />
-                    <input value={this.props.signin.password} className="textbox" name='password' type='password' placeholder='Password' required={true} onChange={event => this.props.Change2(event)} />
+                    <input style={wrong} value={this.props.signin.email} className="textbox" name='email' type='email' placeholder='E-mail' required={true} onChange={event => this.props.Change2(event)} />
+                    <input style={wrong} value={this.props.signin.password} className="textbox" name='password' type='password' placeholder='Password' required={true} onChange={event => this.props.Change2(event)} />
                     <button style={{background:"red"}} className="docpat" onSubmit={event => this.props.Submit(event)} >Sign in</button>
                 </Fragment>
                     :

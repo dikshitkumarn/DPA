@@ -8,26 +8,10 @@ class Login extends React.Component {
 
     state={
         fromDB:{
-            doctorInfo:[{
-                name:"mani",
-                age:"18",
-                location:"annanagar",
-                email:"mani@manipur.com",
-                contact:"9600714338",
-                latitude:"11.2189",
-                longitude:"78.1674"
-            }],
-            patientInfo:[{
-                name:"mani",
-                age:"18",
-                location:"annanagar",
-                email:"mani@manipur.com",
-                contact:"9600714338",
-                latitude:"11.2189",
-                longitude:"78.1674"
-            }],
-            isdoctor:false,
-            ispatient:true,
+            doctorInfo:[],
+            patientInfo:[],
+            isdoctor:"false",
+            ispatient:"true",
             // location:"",
             islogin:false
         },
@@ -38,8 +22,8 @@ class Login extends React.Component {
         signup:{
             name:"",
             age:'',
-            isdoctor:false,
-            ispatient:false,
+            isdoctor:"false",
+            ispatient:"false",
             location:"",
             email:"",
             password:"",
@@ -47,7 +31,8 @@ class Login extends React.Component {
             contact:""
         },
         option:2,
-        islogin:false
+        islogin:false,
+        wrong:false
     }
 
     // callAPI = () => {
@@ -68,25 +53,37 @@ class Login extends React.Component {
     handleSubmit = event =>{
         // this.setState({ islogin:true })
         event.preventDefault()
-        if( (this.state.option===1) || (this.state.signup.isdoctor || this.state.signup.ispatient) ){
-        this.setState({islogin:true})
+        if( (this.state.option===2) && (this.state.signup.isdoctor==="true" || this.state.signup.ispatient==="true" ) ){
+        // this.setState({islogin:true})
         console.log("Submitted ")
+        var details
+        if(this.state.option === 2 ){
+        details = {...this.state.signup}
+        console.log(details)
+        axios.post(`http://localhost:5000/signup`, details)
+        .then(res => {console.log(res.data[0].name);
+            this.setState({islogin:true})
+            })
         }
-        // var details
-        // if(this.state.option === 2 ){
-        // details = {...this.state.signup}
-        // axios.post(`http://localhost:5000/test`, {details})
-        // .then(res => {console.log(res);
-        //     this.setState({islogin:true})
-        //     })
-        // }
-        // else if(this.state.option === 1 ){
-        //     details = {...this.state.signin}
-        //     axios.post(`http://localhost:5000/test`, {details})
-        //     .then(res => {console.log(res);
-        //         this.setState({ islogin:true })
-        //         })
-        // }
+    }
+        else if(this.state.option === 1 ){
+            details = {...this.state.signin}
+            axios.post(`http://localhost:5000/login`, details)
+            .then(res => {console.log(res.data.doctor);
+                if(res.data==="Incorrect"){
+                    this.setState({wrong:true})
+                }
+                else if(res.data.isdoctor==="true") {
+                    var set = {...this.state.fromDB}
+                    set.doctorInfo=[{...res.data.doctor}]
+                    set.patientInfo=[...res.data.data]
+                    set.isdoctor="true"
+                    set.ispatient="false"
+                    set.islogin=true
+                this.setState({islogin:true,fromDB:{...set}})
+                }
+                })
+        }
     }
 
     handlesignup = event => {
@@ -95,12 +92,12 @@ class Login extends React.Component {
         var to = event.target.name
         var val = event.target.value
         if(to==="Doctor"){
-            n.signup.isdoctor=true
-            n.signup.ispatient=false
+            n.signup.isdoctor="true"
+            n.signup.ispatient="false"
         }
         else if(to==="Patient"){
-            n.signup.ispatient=true
-            n.signup.isdoctor=false
+            n.signup.ispatient="true"
+            n.signup.isdoctor="false"
             n.signup.hospital=""
         }
         else{
@@ -127,8 +124,8 @@ class Login extends React.Component {
                 signup:{
                     name:"",
                     age:"",
-                    isdoctor:false,
-                    ispatient:false,
+                    isdoctor:"false",
+                    ispatient:"false",
                     location:"",
                     email:"",
                     password:"",
@@ -154,6 +151,7 @@ class Login extends React.Component {
             <App State={this.state} />:
             <div className="body2" >
             <Decide 
+                wrong={this.state.wrong}
                 option={this.state.option}
                 signup={this.state.signup}
                 signin={this.state.signin}

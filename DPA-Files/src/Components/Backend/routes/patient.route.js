@@ -1,7 +1,7 @@
 const express= require('express')
+const geocode= require('../location/geocode')
 const Patient= require('../models/patient')
 const router= new express.Router()
-
 
 
 
@@ -26,9 +26,9 @@ router.get('/patient', async (req,res)=>{
     const patient = await Patient.find({})
     try{
      if(patient.length===0){
-         res.status(500).send({error:"Not found"})
+         res.status(404).send("error")
      } 
-     res.send(patient)
+      res.send(patient)
 
     }catch(e){
         res.status(400).send()
@@ -93,6 +93,9 @@ res.send("Patient info deleted")
 res.status(400).send(e)
 }
 })
+
+
+
 
 
 

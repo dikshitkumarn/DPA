@@ -64,7 +64,7 @@ class MyProfile extends React.Component {
                 <div onClick={this.toggle} style={hide} className="fake-profile" > Your Profile </div>
                 <div style={contain} className="profile-container" >
                     <div className="profile" > 
-                        {this.props.isdoctor?
+                        {this.props.isdoctor==="true"?
                         <img src={doctor} style={{width:"100%",height:"100%"}} alt="doctor" />:
                         <img src={patient} style={{width:"100%",height:"100%"}} alt="patient" />
                         }

@@ -1,31 +1,17 @@
 const express= require('express')
-const bodyParser= require('body-parser')
 const router= new express.Router()
 const Doctor= require('../models/doctor')
 
 
-
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
-
-
-
-
-router.post('/test', urlencodedParser,(req,res)=>{
-    console.log(req.body)
-})
-
-
-
-
 //Creating Doctor
 
-router.post('/doctor', urlencodedParser ,async (req,res)=>{
+router.post('/doctor',async (req,res)=>{
 try{
     const doctor= await new Doctor(req.body)
 await doctor.save()
 res.send(doctor)
 }catch(e){
-res.status(404).send("some probs")
+res.status(400).send(e)
 }
 })
 

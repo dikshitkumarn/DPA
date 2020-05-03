@@ -7,15 +7,31 @@ const DoctorSchema= new mongoose.Schema({
         type:String,
         default:"Doctor"
     },
+    age:{
+        type:String
+    },
+    contact: {
+        type: String,
+       unique:true,
+        // validate(value) {
+        //     if (!value===10) {
+        //         throw new Error("Invlid Phone Number!")
+        //     }
+        // }
+    },
+    
 hospital:{
     type:String,
-  
+    required:true,
 
+},
+location:{
+type:String,
 },
 
 email:{
     type:String,
-    
+    required:true,
     unique:true,
     validate(value){
         if(!validator.isEmail(value)){
@@ -27,17 +43,18 @@ throw new Error("Invalid Email!")
 password:{
     type:String,
     trim:true,
-    minlength:6,
+    minlength:6
     
 },
 
 isdoctor:{
-    type:Boolean,
-    
+    type:String,
+    required:true
 },
 
 ispatient:{
-    type:Boolean
+    type:String,
+    required:true
 }
 
 })
