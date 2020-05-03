@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import axios from 'axios'
 import App from '../../Containers/App'
 import './Login.css'
@@ -49,8 +49,10 @@ class Login extends React.Component {
     // }
 
     handleSubmit = event =>{
-        this.setState({ islogin:true })
+        // this.setState({ islogin:true })
         event.preventDefault()
+        this.setState({islogin:true})
+        console.log("Submitted ")
         // var details
         // if(this.state.option === 2 ){
         // details = {...this.state.signup}
@@ -131,6 +133,7 @@ class Login extends React.Component {
         return (
             this.state.islogin?
             <App State={this.state} />:
+            <div className="body2" >
             <Decide 
                 option={this.state.option}
                 signup={this.state.signup}
@@ -141,6 +144,7 @@ class Login extends React.Component {
                 option2={this.option2}
                 handlesignin={this.handlesignin}
             />
+            </div>
         )
     }
     }

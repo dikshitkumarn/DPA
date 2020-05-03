@@ -24,13 +24,14 @@ class Form extends React.Component {
             background: this.state.patcolor
         }
     return(
-        <div className="form-container" >
-        <form className='account-form' onSubmit={(event) => this.props.Submit(event)}>
-            <div className={'account-form-fields ' + (this.props.option === 1 ? 'sign-in' : (this.props.option === 2 ? 'sign-up' : 'forgot')) }>
+        // <div className="" >
+        <form className='account-form form-container' onSubmit={ event => this.props.Submit(event)}>
+            <div className={'account-form-fields ' + (this.props.option === 1 ? 'sign-in' : 'sign-up') }>
                 {this.props.option === 1 ?
                 <Fragment>
-                    <input id='email' value={this.props.signin.email} className="textbox" name='email' type='email' placeholder='E-mail' required={true} onChange={event => this.props.Change2(event)} />
-                    <input id='password' value={this.props.signin.password} className="textbox" name='password' type='password' placeholder='Password' required={true} onChange={event => this.props.Change2(event)} />
+                    <input value={this.props.signin.email} className="textbox" name='email' type='email' placeholder='E-mail' required={true} onChange={event => this.props.Change2(event)} />
+                    <input value={this.props.signin.password} className="textbox" name='password' type='password' placeholder='Password' required={true} onChange={event => this.props.Change2(event)} />
+                    <button style={{background:"red"}} className="docpat" onSubmit={event => this.props.Submit(event)} >Sign in</button>
                 </Fragment>
                     :
                 <Fragment>
@@ -42,15 +43,13 @@ class Form extends React.Component {
                     <button name="Doctor" style={docstyle} className="docpat" onClick={event => {this.props.Change(event); this.setState({doccolor:"crimson",patcolor:"#6381e8",showtextbox:true}) }} > DOCTOR </button>
                     {this.state.showtextbox?<input name="hospital" type="text" value={this.props.signup.hospital} className="textbox" placeholder="Hospitalname" required={false} onChange={event => this.props.Change(event)} />:null}
                     <button name="Patient" style={patstyle} className="docpat" onClick={event => {this.props.Change(event); this.setState({doccolor:"#6381e8",patcolor:"crimson",showtextbox:false}) }} > Patient </button>
-                    <input name="location" type="text" className="textbox" value={this.props.signup.location} placeholder="Your Location" required={false} onChange={event => this.props.Change(event)} />
+                    <input name="location" type="text" className="textbox" value={this.props.signup.location} placeholder="Your Location" required={true} onChange={event => this.props.Change(event)} />
+                    <button className="docpat" style={{background:"red"}} onSubmit={ event=> this.props.Submit(event)} >Sign Up</button>
                 </Fragment>
                 }
             </div>
-            <button className='btn-submit-form' type='submit' onClick={ event => this.props.Submit(event) } >
-                { this.props.option === 1 ? 'Sign in' : (this.props.option === 2 && 'Sign up') }
-            </button>
         </form>
-        </div>
+        // </div>
         )
     }
 }

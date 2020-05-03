@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+import MyProfile from '../Components/MyProfile/MyProfile'
 import Doctor from '../Components/Person/Doctor'
 import Patient from '../Components/Person/Patient'
 // import Login from '../Components/Login/Login'
@@ -217,17 +218,15 @@ class App extends React.Component{
             details=this.state.displaydoctor
         }
         return ( 
-            // <div className="body" >
-            <Fragment className="body2" >
-                <div className="MyProfile" ></div>
-                <div className="fake-body" >
+            <div className="body" >
+                <MyProfile />
+                <div className="fake-body" ></div>
                     <div className="Container" >
                             {person}
                     </div>
                     <Details Details={details} showdetails={this.state.showdetails} isLogin={this.state.isLogin} Click={this.close} />
-                </div>
-                </Fragment>
-            // </div>
+                
+            </div>
         )
     }
 }

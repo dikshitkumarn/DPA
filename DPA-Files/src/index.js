@@ -7,4 +7,11 @@ import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(<Login />, document.getElementById('root'));
 
+// var fb2 = document.getElementById('fb2')
+// var mp =document.getElementById('mp')
+
+// fb2.onclick =function() {
+//     fb2.style.display="flex"
+// }
+
 registerServiceWorker();

@@ -4,10 +4,16 @@
   box-sizing: border-box;
 }
 
-.body {
+.body2 {
+  display: flex;
+  justify-content: center;
+  padding-top: 10%;
   font-family: Nunito, Roboto, Arial, sans-serif;
   background: #4D6FE5;
   height: 100vh;
+  position: relative;
+  top: 0;
+  left: 0;
 }
 
 #app {
@@ -15,13 +21,13 @@
   display: -webkit-box;
   display: flex;
   -webkit-box-pack: center;
-          justify-content: center;
+   justify-content: center;
 }
 
 .container {
   text-align: center;
   color: #fff;
-  margin-top: 100px;
+  /* margin-top: 10%; */
 }
 .container > header {
   font-size: 1.3rem;
@@ -29,8 +35,6 @@
   margin: 0 auto 60px auto;
   position: relative;
   height: 27px;
-  /* width: 250px; */
-  width: 60%;
   min-width: 230px;
   overflow: hidden;
 }
@@ -40,7 +44,7 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-          flex-direction: column;
+   flex-direction: column;
   position: absolute;
   width: 100%;
   -webkit-transition: all 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86);
@@ -48,11 +52,11 @@
 }
 .header-headings.sign-in {
   -webkit-transform: translateY(0);
-          transform: translateY(0);
+   transform: translateY(0);
 }
 .header-headings.sign-up {
   -webkit-transform: translateY(-25px);
-          transform: translateY(-25px);
+   transform: translateY(-25px);
 }
 
 .options {
@@ -194,9 +198,7 @@
   transition: all 0.2s ease;
   margin: 5px;
 }
-/* .docpat:active{
-    background: crimson;
-} */
 #signas{
     background-color: rgb(42, 165, 73);
+    /* background-color: rgb(204, 202, 66); */
 }
