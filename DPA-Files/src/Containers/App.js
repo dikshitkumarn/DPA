@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react'
 import Doctor from '../Components/Person/Doctor'
 import Patient from '../Components/Person/Patient'
-import Login from '../Components/Login/Login'
+// import Login from '../Components/Login/Login'
 import './App.css'
 import Details from '../Components/Detail Page/Details'
 // import Doctorcontext from '../hoc/Context/Doctorcontext'
 // import Patientcontext from '../hoc/Context/Patientcontext'
+
 
 var newdoctorInfo
 var newpatientInfo
@@ -14,11 +15,11 @@ class App extends React.Component{
 
     state={
         //Database
-        isDoctor: false,
-        isPatient: false,
-        isLogin: false,
-        checked1: false,
-        checked2: false,
+        isDoctor: this.props.State.fromDB.isdoctor,
+        isPatient: this.props.State.fromDB.ispatient,
+        isLogin: true,
+        // checked1: false,
+        // checked2: false,
         doctorInfo: [
             {
                 name: "doctor mani",
@@ -91,10 +92,10 @@ class App extends React.Component{
         showdetails:false
     }
 
-    static getDerivedStateFromProps = (props,State) => {
-        console.log("derivedstate")
-        return State
-    }
+    // static getDerivedStateFromProps = (props,State) => {
+    //     console.log("derivedstate")
+    //     return State
+    // }
 
     // shouldComponentUpdate(nextProps,nextState){
     //     console.log("APP shouldcomponentupdate")
@@ -106,11 +107,12 @@ class App extends React.Component{
     //         return true
     // }
 
-    componentDidUpdate(){
-        console.log("componentdidupdate")
-    }
+    // componentDidUpdate(){
+    //     console.log("componentdidupdate")
+    // }
 
     UpdateState = (id) => {
+        
         var newState = {...this.state}
         newState.showdetails=true
         if(this.state.isPatient){
@@ -136,29 +138,29 @@ class App extends React.Component{
         }
     }
 
-    handleLogin = () => {
-        var State = [...this.state]
-        if(this.state.checked1) State.isDoctor=true
-        else if(this.state.checked2) State.isPatient=true
-        State.isLogin=true
-        this.setState( {...State} )
-    }
-    handleChange1 = () => {
-        this.setState(
-            PrevState => {return({checked1: !PrevState.checked1, checked2:false})}
-        )
-    }
+    // handleLogin = () => {
+    //     var State = [...this.state]
+    //     if(this.state.checked1) State.isDoctor=true
+    //     else if(this.state.checked2) State.isPatient=true
+    //     State.isLogin=true
+    //     this.setState( {...State} )
+    // }
+    // handleChange1 = () => {
+    //     this.setState(
+    //         PrevState => {return({checked1: !PrevState.checked1, checked2:false})}
+    //     )
+    // }
 
-    handleChange2 = () => {
-        this.setState(
-            PrevState => {return({checked2: !PrevState.checked2, checked1:false})}
-        )
-    }
+    // handleChange2 = () => {
+    //     this.setState(
+    //         PrevState => {return({checked2: !PrevState.checked2, checked1:false})}
+    //     )
+    // }
     close = () => {
         this.setState({showdetails : false }) 
-        console.log(this.state.showdetails)
     }
     render = () => { 
+        console.log(this.state)
         var person
         var details = {}
         if(this.state.isLogin && this.state.isDoctor){
@@ -214,19 +216,18 @@ class App extends React.Component{
             )
             details=this.state.displaydoctor
         }
-        else{
-            person = (<Login Click={this.handleLogin} checked1={this.state.checked1} checked2={this.state.checked2} Change1={this.handleChange1} Change2={this.handleChange2} />)
-        }
         return ( 
-            <Fragment>
+            // <div className="body" >
+            <Fragment className="body2" >
                 <div className="MyProfile" ></div>
                 <div className="fake-body" >
                     <div className="Container" >
                             {person}
                     </div>
-                    <Details display={this.state.isLogin} Details={details} showdetails={this.state.showdetails} isLogin={this.state.isLogin} Click={this.close} />
+                    <Details Details={details} showdetails={this.state.showdetails} isLogin={this.state.isLogin} Click={this.close} />
                 </div>
-            </Fragment>
+                </Fragment>
+            // </div>
         )
     }
 }

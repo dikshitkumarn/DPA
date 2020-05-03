@@ -12,9 +12,9 @@ class Details extends React.Component {
     //     }
     // }
 
-    componentDidUpdate(){
-        console.log("DETAILS componentDidUpdate")
-    }
+    // componentDidUpdate(){
+    //     console.log("DETAILS componentDidUpdate")
+    // }
 
     render(){
         var allset = Object.keys(this.props.Details)
@@ -24,12 +24,12 @@ class Details extends React.Component {
             output = ( 
                 this.props.showdetails ?
                 <Fragment>
-                    <div className="Details-container" ></div>
+                    <div className="Details-container" onClick={this.props.Click} ></div>
                     <div className="Details" >
                         PROFILE: {this.props.Details.profile}<br/>
                         NAME: {this.props.Details.name}<br/>
                         PLACE: {this.props.Details.place}<br/>
-                        <div className="close" onClick={this.props.Click} >X</div>
+                        <div className="close" onClick={this.props.Click} ></div>
                     </div>
                 </Fragment>
                 : null
@@ -42,9 +42,9 @@ class Details extends React.Component {
             output = (
                 this.props.showdetails ?
                 <Fragment>
-                    <div className="Details-container" ></div>
+                    <div className="Details-container" onClick={this.props.Click} ></div>
                     <div className="Details" >  Choose your Doctor
-                    <div className="close" onClick={this.props.Click} >X</div>
+                    <div className="close" onClick={this.props.Click} ></div>
                     </div>
                 </Fragment>
                 : null
