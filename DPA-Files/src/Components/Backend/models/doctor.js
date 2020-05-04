@@ -15,11 +15,7 @@ const DoctorSchema= new mongoose.Schema({
     contact: {
         type: String,
        unique:true,
-        // validate(value) {
-        //     if (!value===10) {
-        //         throw new Error("Invlid Phone Number!")
-        //     }
-        // }
+     
     },
     
 hospital:{
@@ -32,15 +28,19 @@ type:String,
 required:true
 },
 
+lat:{
+    type:String
+},
+
+long:{
+    type:String
+},
+
 email:{
     type:String,
     required:true,
     unique:true,
-//     validate(value){
-//         if(!validator.isEmail(value)){
-// throw new Error("Invalid Email!")
-//         }
-//     }
+
 },
 
 password:{

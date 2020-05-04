@@ -21,6 +21,13 @@ const PatientSchema= new mongoose.Schema({
         required:true
     },
 
+    lat:{
+        type:String
+    },
+    
+    long:{
+        type:String
+    },
 
 
     contact: {

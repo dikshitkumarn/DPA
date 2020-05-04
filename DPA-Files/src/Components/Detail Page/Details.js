@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPhone, faMapMarker } from '@fortawesome/free-solid-svg-icons'
+import MapContainer from './Map'
+
 
 class Details extends React.Component {
 
@@ -18,15 +20,14 @@ class Details extends React.Component {
     //     console.log("DETAILS componentDidUpdate")
     // }
 
-
     render(){
         var allset = Object.keys(this.props.Details)
         var output
         var style={
             color:"red"
         }
-        // var Map = "https://www.google.com/maps/place/11.2189%C2%B0N+78.1674%C2%B0E"
-        var Map = "https://www.google.com/maps/place/"+this.props.Details.latitude+"°N+"+this.props.Details.longitude+"°E"
+        // var Map = "https://www.google.com/maps/place/11.2189°N+78.1674°E"
+        // var Map = "https://www.google.com/maps/place/"+this.props.Details.latitude+"°N+"+this.props.Details.longitude+"°E"
         console.log( "Details rendering...", allset.length)
         if(allset.length !== 0 && this.props.isLogin)
             output = ( 
@@ -43,7 +44,10 @@ class Details extends React.Component {
                                 <button className="Details-inner">{this.props.Details.email}</button>
                                 <button className="Details-inner"><FontAwesomeIcon style={style} icon={faPhone} aria-hidden="true" /> {this.props.Details.contact}</button>
                                 <button className="Details-inner"> <FontAwesomeIcon style={style} icon={faMapMarker} aria-hidden="true" /> {this.props.Details.location}</button>
-                                <button className="Details-inner"><a className="link" href={Map} target="_blank" > Directions</a></button>
+                                {/* <button className="Details-inner"><a className="link" href={Map} target="_blank" > Directions</a></button> */}
+                            </div>
+                            <div className="map">
+                                    <MapContainer lat={this.props.Details.lat} long={this.props.Details.long} />
                             </div>
                         <div className="close" onClick={this.props.Click} ></div>
                     </div>

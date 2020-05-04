@@ -27,7 +27,7 @@ class Patient extends React.Component {
         return(
         <button className="Doctor" onClick={ () => this.props.Click(this.props.id) } >
             <div className="Profile" ><img src={doctor} style={{width:"100%",height:"100%"}} alt="profile" /></div>
-               <h4> Dr.{this.props.Doctor_name}<br/>
+               <h4>{this.props.Doctor_name}<br/>
                <FontAwesomeIcon style={style} icon={faMapMarker} aria-hidden="true" /> {this.props.Doctor_place}<br/>
                <FontAwesomeIcon style={style} icon={faPhone} aria-hidden="true" />  {this.props.Doctor_contact}<br/></h4>
         </button>

@@ -17,16 +17,17 @@
     margin: 5px;
     z-index: 1;
     text-transform: capitalize;
+    outline: none;
 }
-/* .Doctor:active{
-    box-shadow: 0 0 5px #ccc;
+.Doctor:active{
+    box-shadow: 0 0 5px rgb(0, 0, 0);
+    background:#4D6FE5;
+    width: 89%;
+}
+/* .Doctor:hover{
+    cursor: pointer;
     width: 77%;
 } */
-.Doctor:hover{
-    background-color: rgb(211, 47, 47);
-    cursor: pointer;
-    /* width: 77%; */
-}
 .Details-container{
     position: relative;
     margin: 0;
@@ -40,8 +41,9 @@
     top: 20%;
     width: 45%;
     height: 78%;
-    max-height: 500px;
+    min-height: fit-content;
     z-index: 501;
+    color: white;
     /* border: 5px solid #ccc; */
     border-radius: 5px;
     background-color: #4D6FE5;
@@ -78,12 +80,14 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        flex-wrap: nowrap;
         position: fixed;
         width: 87%;
         height: 75%;
         z-index: 600;
         top: 10%;
         opacity: 1;
+        overflow: scroll;
         background-color: #4D6FE5;
         box-shadow: 0 0 10px rgb(177, 176, 176);
         /* -webkit-transition: all 0.2s ease;
@@ -91,6 +95,7 @@
         min-height: max-content;
     }
     .Profile2{
+        display: block;
         width: 70px;
         height: 70px;
     }
@@ -124,7 +129,8 @@
         top: 20%;
         width: 45%;
         height: 78%;
-        max-height: 500px;
+        overflow-y: scroll;
+        /* max-height: 500px; */
         z-index: 501;
         background-color: rgb(41, 83, 235);
         box-shadow: 0 0 10px rgb(177, 176, 176);
@@ -219,7 +225,7 @@
     position: fixed;
     width: 100%;
     height: 25%;
-    background-color: #4D6FE5;
+    background-color: rgb(55, 89, 209);
     z-index: 2;
     top: 0;
     cursor: pointer;
@@ -293,8 +299,8 @@
   color: #fff;
   font-size: 1rem;
   font-family: Nunito, sans-serif;
-  background: #6381e8;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.13);
+  background: rgb(62, 89, 190);
+  box-shadow: 0px 1px 2px rgb(255, 255, 255);
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
   margin: 5px;
@@ -309,10 +315,11 @@
     height: 100%;
     z-index: 3;
     /* background-color: #4D6FE5; */
-    background-color: #4D6FE5;
+    background-color: rgb(36, 58, 129);
     color:white;
 }
 .Profile2{
+    display: flex;
     position: relative;
     border-radius: 50%;
     /* top: 10%; */
@@ -328,7 +335,7 @@
     flex-wrap: nowrap;
     width: max-content;
     height: max-content;
-    position: relative;
+    /* position: relative; */
 }
 .Details-inner{
     position: relative;
@@ -340,8 +347,8 @@
     color: #fff;
     font-size: 1rem;
     font-family: Nunito, sans-serif;
-    background:#4D6FE5;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.13);
+    background:#6381e8;
+    box-shadow: 0px 1px 2px rgb(255, 255, 255);
     margin: 5px;
     z-index: 1;
     text-transform: capitalize;
@@ -351,3 +358,36 @@
     color: white;
     cursor: pointer;
 }
+.map{
+    position: relative;
+    left: auto;
+    width: 80%;
+    height: 28%;
+    min-height: 100px;
+    min-width: 70px;
+    border-radius: 10px;
+    box-shadow: 0px 1px 2px rgb(255, 255, 255);
+    /* border: 0 0 5px #b7bbc9; */
+}
+.sidebarStyle {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 12px;
+    background-color: #404040;
+    color: #ffffff;
+    z-index: 1 !important;
+    padding: 6px;
+    font-weight: bold;
+  }
+  
+  .mapContainer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    border-radius: 10px;
+    border: 5px solid #6381e8;
+  }

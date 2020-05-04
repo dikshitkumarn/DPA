@@ -157,9 +157,9 @@ class App extends React.Component{
         return ( 
             <div className="body" >
                 {this.props.State.fromDB.isdoctor==="true"?
-                    <MyProfile name={this.props.State.fromDB.doctorInfo[0].name} age={this.props.State.fromDB.doctorInfo[0].age} location={this.props.State.fromDB.doctorInfo[0].location} isdoctor={this.props.State.fromDB.isdoctor} contact={this.props.State.fromDB.doctorInfo[0].contact} />
+                    <MyProfile email={this.props.State.fromDB.doctorInfo[0].email} name={this.props.State.fromDB.doctorInfo[0].name} age={this.props.State.fromDB.doctorInfo[0].age} location={this.props.State.fromDB.doctorInfo[0].location} isdoctor={this.props.State.fromDB.isdoctor} contact={this.props.State.fromDB.doctorInfo[0].contact} />
                     :
-                    <MyProfile name={this.props.State.fromDB.patientInfo[0].name} age={this.props.State.fromDB.patientInfo[0].age} location={this.props.State.fromDB.patientInfo[0].location} isdoctor={this.props.State.fromDB.isdoctor} contact={this.props.State.fromDB.patientInfo[0].contact} />
+                    <MyProfile email={this.props.State.fromDB.patientInfo[0].email} name={this.props.State.fromDB.patientInfo[0].name} age={this.props.State.fromDB.patientInfo[0].age} location={this.props.State.fromDB.patientInfo[0].location} isdoctor={this.props.State.fromDB.isdoctor} contact={this.props.State.fromDB.patientInfo[0].contact} />
                 }
                 <div className="fake-body" ></div>
                     <div className="Container" >

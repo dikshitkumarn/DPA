@@ -2,6 +2,9 @@ import React, { Fragment } from 'react'
 import DPA from '.././Images/DPA_logo'
 import doctor from '.././Images/doctorpic.png'
 import patient from '.././Images/patientpic.png'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPhone, faMapMarker } from '@fortawesome/free-solid-svg-icons'
+
 class MyProfile extends React.Component {
     state={
         click:false,
@@ -56,12 +59,15 @@ class MyProfile extends React.Component {
                 display:"none"
             }
     }
+    var style={
+        color:"red"
+    }
     return(
         <Fragment>
             <div className="fake-body2" onClick={this.display} style={fake} ></div>
             <div onClick={this.toggle} className="MyProfile"  style={myprofile} >
                 <DPA />
-                <div onClick={this.toggle} style={hide} className="fake-profile" > Your Profile </div>
+                <div onClick={this.toggle} style={hide} className="fake-profile" > Click to View Your Profile </div>
                 <div style={contain} className="profile-container" >
                     <div className="profile" > 
                         {this.props.isdoctor==="true"?
@@ -71,8 +77,9 @@ class MyProfile extends React.Component {
                     </div>
                     <button className="button" >{this.props.name}</button>
                     <button className="button" > {this.props.age} </button>
-                    <button className="button" > {this.props.location} </button>
-                    <button className="button" > {this.props.contact} </button>
+                    <FontAwesomeIcon style={style} icon={faMapMarker} aria-hidden="true" /><button className="button" > {this.props.location} </button>
+                    <FontAwesomeIcon style={style} icon={faPhone} aria-hidden="true" /><button className="button" > {this.props.contact} </button>
+                    <button className="button" > {this.props.email} </button>
                 </div>
             </div>
         </Fragment>

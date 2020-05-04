@@ -27,8 +27,10 @@ class Login extends React.Component {
             location:"",
             email:"",
             password:"",
-            hospital:" ",
-            contact:""
+            hospital:"",
+            contact:"",
+            lat:"",
+            long:""
         },
         option:2,
         islogin:false,
@@ -50,36 +52,54 @@ class Login extends React.Component {
     //     })
     // }
 
+    getlatitude = location => {
+        console.log("Get latitude")
+        // var latitude = {...this.state}
+        
+        // console.log(lati,longi)
+    }
+
     handleSubmit = event =>{
         event.preventDefault()
         var details,set
         if( (this.state.option===2) && (this.state.signup.isdoctor==="true" || this.state.signup.ispatient==="true" ) ){
         console.log("Submitted ")
-        // if(this.state.option === 2 ){
         details = {...this.state.signup}
         console.log(details)
-        axios.post(`http://localhost:5000/signup`, details)
-        .then(res => {console.log(res.data);
-            if(res.data.isdoctor === "true"){
-                set = {...this.state.fromDB}
-                set.doctorInfo = [{...res.data.doctor}]
-                set.patientInfo = [...res.data.data]
-                set.isdoctor = "true"
-                set.ispatient = "false"
-                set.islogin = true
-                this.setState({ islogin:true, fromDB:{...set} })
-            }
-            else if(res.data.ispatient === "true" ){
-                set = {...this.state.fromDB}
-                set.patientInfo = [{...res.data.patient}]
-                set.doctorInfo = [...res.data.info]
-                set.isdoctor = "false"
-                set.ispatient = "true"
-                set.islogin = true
-                this.setState({ islogin:true, fromDB:{...set} })
-            }
+        // Getting latituede and longitude
+        const url = "https://api.mapbox.com/geocoding/v5/mapbox.places/"+ this.state.signup.location +".json?access_token=pk.eyJ1IjoiamFnYWRoZWVzaDYiLCJhIjoiY2s3aXo4MTBlMG5xdDNrbHB1OXZ4NGdnNSJ9.BmItdc7_NyDeeUsFMNL2kA"
+        axios.get(url)
+        .then(res => {console.log(res.data.features[0]);
+            // if(res.body.features.length != 0){
+            // console.log(res.data.features[0].center[1].toString(),res.data.features[0].center[0].toString())
+            details.lat = res.data.features[0].center[1].toString()
+            details.long = res.data.features[0].center[0].toString()
+            console.log(details.lati,details.long)
+        })
+        console.log(details)
+        setTimeout( () => {
+            axios.post(`http://localhost:5000/signup`, details)
+            .then(res => {console.log(res.data);
+                if(res.data.isdoctor === "true"){
+                    set = {...this.state.fromDB}
+                    set.doctorInfo = [{...res.data.doctor}]
+                    set.patientInfo = [...res.data.data]
+                    set.isdoctor = "true"
+                    set.ispatient = "false"
+                    set.islogin = true
+                    this.setState({ islogin:true, fromDB:{...set} })
+                }
+                else if(res.data.ispatient === "true" ){
+                    set = {...this.state.fromDB}
+                    set.patientInfo = [{...res.data.patient}]
+                    set.doctorInfo = [...res.data.info]
+                    set.isdoctor = "false"
+                    set.ispatient = "true"
+                    set.islogin = true
+                    this.setState({ islogin:true, fromDB:{...set} })
+                }
             })
-        // }
+        }, 3000 )
     }
         else if(this.state.option === 1 ){
             details = {...this.state.signin}
@@ -170,6 +190,7 @@ class Login extends React.Component {
 
    
     render() {
+        // this.getlatitude("velur")
         return (
             this.state.islogin?
             <App State={this.state} />:
@@ -189,4 +210,6 @@ class Login extends React.Component {
         )
     }
     }
+
+
 export default Login
