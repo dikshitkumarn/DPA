@@ -27,7 +27,7 @@ class Login extends React.Component {
             location:"",
             email:"",
             password:"",
-            hospital:"",
+            hospital:" ",
             contact:""
         },
         option:2,
@@ -51,20 +51,35 @@ class Login extends React.Component {
     // }
 
     handleSubmit = event =>{
-        // this.setState({ islogin:true })
         event.preventDefault()
+        var details,set
         if( (this.state.option===2) && (this.state.signup.isdoctor==="true" || this.state.signup.ispatient==="true" ) ){
-        // this.setState({islogin:true})
         console.log("Submitted ")
-        var details
-        if(this.state.option === 2 ){
+        // if(this.state.option === 2 ){
         details = {...this.state.signup}
         console.log(details)
         axios.post(`http://localhost:5000/signup`, details)
-        .then(res => {console.log(res.data[0].name);
-            this.setState({islogin:true})
+        .then(res => {console.log(res.data);
+            if(res.data.isdoctor === "true"){
+                set = {...this.state.fromDB}
+                set.doctorInfo = [{...res.data.doctor}]
+                set.patientInfo = [...res.data.data]
+                set.isdoctor = "true"
+                set.ispatient = "false"
+                set.islogin = true
+                this.setState({ islogin:true, fromDB:{...set} })
+            }
+            else if(res.data.ispatient === "true" ){
+                set = {...this.state.fromDB}
+                set.patientInfo = [{...res.data.patient}]
+                set.doctorInfo = [...res.data.info]
+                set.isdoctor = "false"
+                set.ispatient = "true"
+                set.islogin = true
+                this.setState({ islogin:true, fromDB:{...set} })
+            }
             })
-        }
+        // }
     }
         else if(this.state.option === 1 ){
             details = {...this.state.signin}
@@ -74,15 +89,24 @@ class Login extends React.Component {
                     this.setState({wrong:true})
                 }
                 else if(res.data.isdoctor==="true") {
-                    var set = {...this.state.fromDB}
-                    set.doctorInfo=[{...res.data.doctor}]
-                    set.patientInfo=[...res.data.data]
-                    set.isdoctor="true"
-                    set.ispatient="false"
-                    set.islogin=true
-                this.setState({islogin:true,fromDB:{...set}})
+                    set = {...this.state.fromDB}
+                    set.doctorInfo = [{...res.data.doctor}]
+                    set.patientInfo = [...res.data.data]
+                    set.isdoctor = "true"
+                    set.ispatient = "false"
+                    set.islogin = true
+                    this.setState({ islogin:true, fromDB:{...set} })
                 }
-                })
+                else if(res.data.ispatient==="true"){
+                    set = { ...this.state.fromDB }
+                    set.patientInfo = [{...res.data.patient}]
+                    set.doctorInfo = [...res.data.info]
+                    set.ispatient = "true"
+                    set.isdoctor = "false"
+                    set.islogin = true
+                    this.setState({ islogin:true, fromDB:{...set} })
+                }
+            })
         }
     }
 
@@ -98,7 +122,7 @@ class Login extends React.Component {
         else if(to==="Patient"){
             n.signup.ispatient="true"
             n.signup.isdoctor="false"
-            n.signup.hospital=""
+            n.signup.hospital=" "
         }
         else{
         n.signup[to] = val
@@ -129,7 +153,7 @@ class Login extends React.Component {
                     location:"",
                     email:"",
                     password:"",
-                    hospital:""
+                    hospital:" "
                 }
             })
     }

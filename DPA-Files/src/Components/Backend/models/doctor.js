@@ -5,10 +5,12 @@ const validator= require('validator')
 const DoctorSchema= new mongoose.Schema({
     name:{
         type:String,
-        default:"Doctor"
+        default:"Doctor",
+        required:true
     },
     age:{
-        type:String
+        type:String,
+        required:true
     },
     contact: {
         type: String,
@@ -27,17 +29,18 @@ hospital:{
 },
 location:{
 type:String,
+required:true
 },
 
 email:{
     type:String,
     required:true,
     unique:true,
-    validate(value){
-        if(!validator.isEmail(value)){
-throw new Error("Invalid Email!")
-        }
-    }
+//     validate(value){
+//         if(!validator.isEmail(value)){
+// throw new Error("Invalid Email!")
+//         }
+//     }
 },
 
 password:{

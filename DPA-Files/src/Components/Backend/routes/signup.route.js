@@ -9,13 +9,16 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 //Signing Up User
 router.post('/signup', urlencodedParser,async (req,res)=>{
-    const data= await Patient.find({})
+    
 if(req.body.isdoctor=="true"&&req.body.ispatient=="false"){
 
     try {
+        const data= await Patient.find({})
+        const isdoctor="true"
+        const ispatient="false"
         const doctor = await new Doctor(req.body)
         await doctor.save()
-        res.send({doctor,data })
+        res.send({doctor,data,isdoctor,ispatient })
     } catch (e) {
         res.status(400).send("Cannot do that")
     }
@@ -23,10 +26,13 @@ if(req.body.isdoctor=="true"&&req.body.ispatient=="false"){
 } else if (req.body.isdoctor == "false" && req.body.ispatient == "true"){
 
     try {
+        const info= await Doctor.find({})
+        const isdoctor="false"
+        const ispatient="true"
         const patient= await new Patient(req.body)
         console.log('working')
         await patient.save()
-        res.send(patient)
+        res.send({patient,info,isdoctor,ispatient})
     }catch(e){
         res.status(400).send(e)
     }
@@ -66,6 +72,7 @@ router.post('/login', urlencodedParser, async (req, res) => {
                 res.send({patient,info,ispatient,isdoctor})
 
             }  if(req.body.password != patient.password) {
+                res.send("Incorrect")
                 console.log("Wrong passsword for patient").send()
             }
 
