@@ -27,7 +27,7 @@ class Details extends React.Component {
             color:"red"
         }
         // var Map = "https://www.google.com/maps/place/11.2189°N+78.1674°E"
-        // var Map = "https://www.google.com/maps/place/"+this.props.Details.latitude+"°N+"+this.props.Details.longitude+"°E"
+        var MAP = "https://www.google.com/maps/place/"+this.props.Details.lat+"°N+"+this.props.Details.long+"°E"
         console.log( "Details rendering...", allset.length)
         if(allset.length !== 0 && this.props.isLogin)
             output = ( 
@@ -46,9 +46,9 @@ class Details extends React.Component {
                                 <button className="Details-inner"> <FontAwesomeIcon style={style} icon={faMapMarker} aria-hidden="true" /> {this.props.Details.location}</button>
                                 {/* <button className="Details-inner"><a className="link" href={Map} target="_blank" > Directions</a></button> */}
                             </div>
-                            <div className="map">
+                            <a href={MAP} target="_blank" className="map">
                                     <MapContainer lat={this.props.Details.lat} long={this.props.Details.long} />
-                            </div>
+                            </a>
                         <div className="close" onClick={this.props.Click} ></div>
                     </div>
                 </Fragment>
