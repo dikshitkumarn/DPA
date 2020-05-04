@@ -15,7 +15,7 @@ const Decide = props => {
                 <li className={props.option === 1 ? 'active' : ''} onClick={props.option1}>Sign in</li>
                 <li className={props.option === 2 ? 'active' : ''} onClick={props.option2}>Sign up</li>
             </ul>
-            <Form option={props.option} wrong={props.wrong} Change={props.handlesignup} Change2={props.handlesignin} Submit={props.handleSubmit} signup={props.signup} signin={props.signin} />
+            <Form load={props.load} option={props.option} wrong={props.wrong} Change={props.handlesignup} Change2={props.handlesignin} Submit={props.handleSubmit} signup={props.signup} signin={props.signin} />
         </div>
             // show={props.show} 
     )

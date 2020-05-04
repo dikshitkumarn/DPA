@@ -34,7 +34,8 @@ class Login extends React.Component {
         },
         option:2,
         islogin:false,
-        wrong:false
+        wrong:false,
+        load:false
     }
 
     // callAPI = () => {
@@ -61,6 +62,7 @@ class Login extends React.Component {
 
     handleSubmit = event =>{
         event.preventDefault()
+        this.setState({load:true})
         var details,set
         if( (this.state.option===2) && (this.state.signup.isdoctor==="true" || this.state.signup.ispatient==="true" ) ){
         console.log("Submitted ")
@@ -98,6 +100,7 @@ class Login extends React.Component {
                     set.islogin = true
                     this.setState({ islogin:true, fromDB:{...set} })
                 }
+                this.setState({load:false})
             })
         }, 3000 )
     }
@@ -205,6 +208,7 @@ class Login extends React.Component {
                 option1={this.option1}   
                 option2={this.option2}
                 handlesignin={this.handlesignin}
+                load={this.state.load}
             />
             </div>
         )

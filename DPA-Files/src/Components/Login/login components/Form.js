@@ -38,6 +38,14 @@ class Form extends React.Component {
     return(
         // <div className="" >
         <form className='account-form form-container' onSubmit={ event => this.props.Submit(event)}>
+            {this.props.load?<div className="loading">
+                <div id="main">
+                <div id="a"> </div>
+                <div id="b"> </div>
+                <div id="c"> </div>
+                <div id="d"></div>
+                </div>
+            </div>:null}
             <div className={'account-form-fields ' + (this.props.option === 1 ? 'sign-in' : 'sign-up') }>
                 {this.props.option === 1 ?
                 <Fragment>
