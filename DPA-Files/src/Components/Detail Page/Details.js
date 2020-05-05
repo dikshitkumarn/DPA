@@ -6,23 +6,15 @@ import MapContainer from './Map'
 
 class Details extends React.Component {
 
-    // shouldComponentUpdate(nextProps,nextState){
-    //     console.log(nextProps.Details,"DETAILS shouldComponentUpdate")
-    //     if(nextProps.Details !== this.props.Details ){
-    //         return true
-    //     }
-    //     else if( nextProps.Details === this.props.Details ) {
-    //         return false
-    //     }
-    // }
-
-    // componentDidUpdate(){
-    //     console.log("DETAILS componentDidUpdate")
-    // }
-
     render(){
         var allset = Object.keys(this.props.Details)
         var output
+        // m=setTimeout(() => {
+        //     return null
+        // }, 100)
+        // m=setTimeout(() => {
+        //     return <MapContainer lat={this.props.Details.lat} long={this.props.Details.long} />
+        // }, 100)
         var style={
             color:"red"
         }
@@ -47,7 +39,7 @@ class Details extends React.Component {
                                 {/* <button className="Details-inner"><a className="link" href={Map} target="_blank" > Directions</a></button> */}
                             </div>
                             <a href={MAP} target="_blank" className="map">
-                                    <MapContainer lat={this.props.Details.lat} long={this.props.Details.long} />
+                                <MapContainer lat={this.props.Details.lat} long={this.props.Details.long} />
                             </a>
                         <div className="close" onClick={this.props.Click} ></div>
                     </div>

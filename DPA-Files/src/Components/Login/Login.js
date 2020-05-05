@@ -38,45 +38,30 @@ class Login extends React.Component {
         load:false
     }
 
-    // callAPI = () => {
-    //     var e = {...this.state}
-    //     axios.get(`http://localhost:5000/patient`)
-    //     .then(res => {
-    //         if(res.data.length === 0){
-    //             console.log("Not found")
-    //         }
-    //         else if(res.data.length !== 0){
-    //             console.log(res);
-    //             e.fromDB.check = res.data
-    //             this.setState({...e})
-    //         }
-    //     })
-    // }
-
-    getlatitude = location => {
-        console.log("Get latitude")
-        // var latitude = {...this.state}
-        
-        // console.log(lati,longi)
-    }
-
     handleSubmit = event =>{
         event.preventDefault()
         this.setState({load:true})
         var details,set
+
+        //Signup
         if( (this.state.option===2) && (this.state.signup.isdoctor==="true" || this.state.signup.ispatient==="true" ) ){
         console.log("Submitted ")
         details = {...this.state.signup}
         console.log(details)
+
+
         // Getting latituede and longitude
         const url = "https://api.mapbox.com/geocoding/v5/mapbox.places/"+ this.state.signup.location +".json?access_token=pk.eyJ1IjoiamFnYWRoZWVzaDYiLCJhIjoiY2s3aXo4MTBlMG5xdDNrbHB1OXZ4NGdnNSJ9.BmItdc7_NyDeeUsFMNL2kA"
         axios.get(url)
-        .then(res => {console.log(res.data.features[0]);
-            // if(res.body.features.length != 0){
-            // console.log(res.data.features[0].center[1].toString(),res.data.features[0].center[0].toString())
+        .then(res => {console.log(res.data);
+            if(res.data.features.length === 0 || res.data === undefined ){
+                details.lat = "48.8566"
+                details.long = "2.3522"
+            }
+            else{
             details.lat = res.data.features[0].center[1].toString()
             details.long = res.data.features[0].center[0].toString()
-            console.log(details.lati,details.long)
+            }
         })
         console.log(details)
         setTimeout( () => {
@@ -99,15 +84,17 @@ class Login extends React.Component {
                     set.ispatient = "true"
                     set.islogin = true
                     this.setState({ islogin:true, fromDB:{...set} })
-                }
-                this.setState({load:false})
-            })
-        }, 3000 )
-    }
+                    }
+                    this.setState({load:false})
+                })
+            }, 3000 )
+        }
+
+        //Signin
         else if(this.state.option === 1 ){
             details = {...this.state.signin}
             axios.post(`http://localhost:5000/login`, details)
-            .then(res => {console.log(res.data.doctor);
+            .then(res => {
                 if(res.data==="Incorrect"){
                     this.setState({wrong:true})
                 }
@@ -160,10 +147,6 @@ class Login extends React.Component {
         x.signin[t] = valu
         this.setState({...x})
     }
-
-    // componentDidMount(){
-    //     this.callAPI() 
-    // }
     option1 = () => {
         this.setState(
             {
@@ -176,7 +159,7 @@ class Login extends React.Component {
                     location:"",
                     email:"",
                     password:"",
-                    hospital:" "
+                    hospital:""
                 }
             })
     }
@@ -189,11 +172,10 @@ class Login extends React.Component {
                     password:""
                 }
             })
-    }
+        }
 
    
     render() {
-        // this.getlatitude("velur")
         return (
             this.state.islogin?
             <App State={this.state} />:

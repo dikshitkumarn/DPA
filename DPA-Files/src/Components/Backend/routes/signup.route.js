@@ -56,7 +56,7 @@ router.post('/login', urlencodedParser, async (req, res) => {
                 var ispatient = "false"
                 res.send({doctor,data,isdoctor,ispatient})
 
-            }  if(req.body.password != doctor.password) {
+            } else if(req.body.password != doctor.password) {
                 console.log("Wrong passsword")
                 res.send("Incorrect")
             }
