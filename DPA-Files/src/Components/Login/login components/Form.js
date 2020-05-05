@@ -17,7 +17,9 @@ class Form extends React.Component {
     //     }
     // }
     render(){
+        console.log(this.props.wrongsignup)
         var wrong
+        var wrongsignup
         var docstyle={
             background: this.state.doccolor,
             color:"white",
@@ -33,6 +35,13 @@ class Form extends React.Component {
             border:"2px solid red"
         }:
         wrong={
+            border:"none"
+        }
+        this.props.wrongsignup?
+        wrongsignup={
+            border:"2px solid red"
+        }:
+        wrongsignup={
             border:"none"
         }
     return(
@@ -64,16 +73,16 @@ class Form extends React.Component {
                 <Fragment>
                     <input spellCheck="false" name="name" type="text" className="textbox" placeholder="Name" value={this.props.signup.name} required={true} onChange={event => this.props.Change(event)} />
                     <input spellCheck="false" name="age" type="number" className="textbox" placeholder="Age" value={this.props.signup.age} required={false} onChange={event => this.props.Change(event)} />
-                    <input spellCheck="false" className="textbox" name='email' type='email' value={this.props.signup.email} placeholder='E-mail' required={true} onChange={event => this.props.Change(event)} />
+                    <input spellCheck="false" style={wrongsignup} className="textbox" name='email' type='email' value={this.props.signup.email} placeholder='E-mail' required={true} onChange={event => this.props.Change(event)} />
                     <input spellCheck="false" className="textbox" minLength="6" name='password' type='password' value={this.props.signup.password} placeholder='Create DPA Password' required={true} onChange={event => this.props.Change(event)} />
                     <button spellCheck="false" className="docpat" id="signas" > Sign Up As... </button>
                     <div className="inline">
                     <input spellCheck="false" name="Doctor" value="doctor" type="button" style={docstyle} className="docpat" onClick={event => {this.props.Change(event); this.setState({doccolor:"crimson",patcolor:"#6381e8",showtextbox:true}) }} />
                     <input spellCheck="false" name="Patient" value="patient" type="button" style={patstyle} className="docpat"  onClick={event => {this.props.Change(event); this.setState({doccolor:"#6381e8",patcolor:"crimson",showtextbox:false}) }} />
                     </div>
-                    {this.state.showtextbox?<input name="hospital" type="text" value={this.props.signup.hospital} className="textbox" placeholder="Hospital name" required={true} onChange={event => this.props.Change(event)} />:null}
+                    {this.state.showtextbox?<input name="hospital" spellCheck="false" type="text" value={this.props.signup.hospital} className="textbox" placeholder="Hospital name" required={true} onChange={event => this.props.Change(event)} />:null}
                     <input spellCheck="false" name="location" type="text" className="textbox" value={this.props.signup.location} placeholder="Your Location" required={true} onChange={event => this.props.Change(event)} />
-                    <input spellCheck="false" name="contact" type="number" minLength="10" maxLength="10" pattern="[0-9]{10}" className="textbox" value={this.props.signup.contact} placeholder="Contact Number" required={true} onChange={ event => this.props.Change(event) } />
+                    <input style={wrongsignup} spellCheck="false" name="contact" type="tel" minLength="10" maxLength="10" pattern="[0-9]{10}" className="textbox" value={this.props.signup.contact} placeholder="Contact Number" required={true} onChange={ event => this.props.Change(event) } />
                     <button className="docpat" style={{background:"red"}} onSubmit={ event=> this.props.Submit(event)} >Sign Up</button>
                 </Fragment>
                 }

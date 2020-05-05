@@ -20,7 +20,8 @@ if(req.body.isdoctor=="true"&&req.body.ispatient=="false"){
         await doctor.save()
         res.send({doctor,data,isdoctor,ispatient })
     } catch (e) {
-        res.status(400).send("Cannot do that")
+        console.log("wrong email")
+        res.send("Incorrect")
     }
  
 } else if (req.body.isdoctor == "false" && req.body.ispatient == "true"){
@@ -34,7 +35,8 @@ if(req.body.isdoctor=="true"&&req.body.ispatient=="false"){
         await patient.save()
         res.send({patient,info,isdoctor,ispatient})
     }catch(e){
-        res.status(400).send(e)
+        console.log("wrong email")
+        res.send("Incorrect")
     }
 
     

@@ -52,6 +52,7 @@ class App extends React.Component{
             }, 100);
         }
         else if(this.state.isDoctor==="true"){
+            console.log("isdoctor signup ",this.state.showdetails)
             newState.withidpatientInfo = newpatientInfo
             newState.withidpatientInfo.map( info => {
                 if( info.id === id ){
@@ -65,7 +66,7 @@ class App extends React.Component{
             }, 100);
             setTimeout(() => {
                 this.setState({showdetails:true})
-            }, 1);
+            }, 100);
         }
     }
     close = () => {

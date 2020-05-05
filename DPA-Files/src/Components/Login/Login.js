@@ -12,7 +12,6 @@ class Login extends React.Component {
             patientInfo:[],
             isdoctor:"false",
             ispatient:"true",
-            // location:"",
             islogin:false
         },
         signin:{
@@ -35,12 +34,12 @@ class Login extends React.Component {
         option:2,
         islogin:false,
         wrong:false,
-        load:false
+        load:false,
+        wrongsignup:false
     }
 
     handleSubmit = event =>{
         event.preventDefault()
-        this.setState({load:true})
         var details,set
 
         //Signup
@@ -48,6 +47,7 @@ class Login extends React.Component {
         console.log("Submitted ")
         details = {...this.state.signup}
         console.log(details)
+        this.setState({load:true})
 
 
         // Getting latituede and longitude
@@ -67,7 +67,11 @@ class Login extends React.Component {
         setTimeout( () => {
             axios.post(`http://localhost:5000/signup`, details)
             .then(res => {console.log(res.data);
-                if(res.data.isdoctor === "true"){
+                if(res.data==="Incorrect"){
+                    this.setState({wrongsignup:true})
+                    this.setState({load:false})
+                }
+                else if(res.data.isdoctor === "true"){
                     set = {...this.state.fromDB}
                     set.doctorInfo = [{...res.data.doctor}]
                     set.patientInfo = [...res.data.data]
@@ -84,19 +88,21 @@ class Login extends React.Component {
                     set.ispatient = "true"
                     set.islogin = true
                     this.setState({ islogin:true, fromDB:{...set} })
-                    }
-                    this.setState({load:false})
+                }
+                this.setState({load:false})
                 })
             }, 3000 )
         }
 
         //Signin
         else if(this.state.option === 1 ){
+            this.setState({load:true})
             details = {...this.state.signin}
             axios.post(`http://localhost:5000/login`, details)
             .then(res => {
                 if(res.data==="Incorrect"){
                     this.setState({wrong:true})
+                    this.setState({load:false})
                 }
                 else if(res.data.isdoctor==="true") {
                     set = {...this.state.fromDB}
@@ -106,6 +112,7 @@ class Login extends React.Component {
                     set.ispatient = "false"
                     set.islogin = true
                     this.setState({ islogin:true, fromDB:{...set} })
+                    this.setState({load:false})
                 }
                 else if(res.data.ispatient==="true"){
                     set = { ...this.state.fromDB }
@@ -115,6 +122,7 @@ class Login extends React.Component {
                     set.isdoctor = "false"
                     set.islogin = true
                     this.setState({ islogin:true, fromDB:{...set} })
+                    this.setState({load:false})
                 }
             })
         }
@@ -132,7 +140,7 @@ class Login extends React.Component {
         else if(to==="Patient"){
             n.signup.ispatient="true"
             n.signup.isdoctor="false"
-            n.signup.hospital=" "
+            n.signup.hospital=""
         }
         else{
         n.signup[to] = val
@@ -182,6 +190,7 @@ class Login extends React.Component {
             <div className="body2" >
             <Decide 
                 wrong={this.state.wrong}
+                wrongsignup={this.state.wrongsignup}
                 option={this.state.option}
                 signup={this.state.signup}
                 signin={this.state.signin}

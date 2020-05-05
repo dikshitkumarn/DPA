@@ -3,22 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPhone, faMapMarker } from '@fortawesome/free-solid-svg-icons'
 import MapContainer from './Map'
 
-
 class Details extends React.Component {
 
     render(){
         var allset = Object.keys(this.props.Details)
         var output
-        // m=setTimeout(() => {
-        //     return null
-        // }, 100)
-        // m=setTimeout(() => {
-        //     return <MapContainer lat={this.props.Details.lat} long={this.props.Details.long} />
-        // }, 100)
         var style={
             color:"red"
         }
-        // var Map = "https://www.google.com/maps/place/11.2189°N+78.1674°E"
         var MAP = "https://www.google.com/maps/place/"+this.props.Details.lat+"°N+"+this.props.Details.long+"°E"
         console.log( "Details rendering...", allset.length)
         if(allset.length !== 0 && this.props.isLogin)
@@ -36,7 +28,6 @@ class Details extends React.Component {
                                 <button className="Details-inner">{this.props.Details.email}</button>
                                 <button className="Details-inner"><FontAwesomeIcon style={style} icon={faPhone} aria-hidden="true" /> {this.props.Details.contact}</button>
                                 <button className="Details-inner"> <FontAwesomeIcon style={style} icon={faMapMarker} aria-hidden="true" /> {this.props.Details.location}</button>
-                                {/* <button className="Details-inner"><a className="link" href={Map} target="_blank" > Directions</a></button> */}
                             </div>
                             <a href={MAP} target="_blank" className="map">
                                 <MapContainer lat={this.props.Details.lat} long={this.props.Details.long} />
